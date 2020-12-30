@@ -21,7 +21,7 @@ Predict Plant Circular RNA Based on Deep Learning
 
 - Biopython (v.1.76): (https://pypi.org/project/biopython/)
 - Scikit-learn (v.0.23.2): (https://scikit-learn.org/stable/)
-- Pytorch(1.6.0): (https://pytorch.org/)
+- Pytorch(v.1.6.0): (https://pytorch.org/)
 
 ---
 ## Download
