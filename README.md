@@ -62,13 +62,13 @@ Predict Plant Circular RNA Based on Deep Learning
       Encode the sequence,in this step need given file:
       - ***upreads.fa***
       - ***downreads.fa*** 
-      Then you can get a file named ***pre_coding*** and will be used to the ***step Circular RNA predicting**
+      Then you can get a file named ***pre_coding*** and will be used to the ***step Circular RNA predicting***
 
   ```bash
    python DeepPcirc_seqprocess.py -up upreads.fa -down downreads.fa
   ```
    4.Circular RNA predicting
-      Final this step, you will get the circular RNA information saved in a file name circ. 
+      Final this step, you will get the circular RNA information saved in a file name ***pre_result***. 
       
   ```bash
    python DeepPcirc_predict.py -infile pre_coding  -modelfile checkpointNCP_ANF.pt -outfile pre_result
