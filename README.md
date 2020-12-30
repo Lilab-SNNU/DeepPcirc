@@ -36,14 +36,14 @@ Predict Plant Circular RNA Based on Deep Learning
 
 ### - You can run DeepPcirc step by step use command line
 
-    1.
+   1.
     
-    2.Reads coding
-      You got ***upreads.fa*** and **unmapped.fasta** from the previous step.In order to make predictions, you need to code them.In this step, you enter the two files obtained in the previous step,then you can get a file named ***pre_coding***.
+   2.Reads coding
+      You got ***upreads.fa*** and ***downreads.fa*** from the previous step.In order to make predictions, you need to code them.In this step, you enter the two files obtained in the previous step,then you can get a file named ***pre_coding***.
   ```bash
    python DeepPcirc_seqprocess.py -up upreads.fa -down downreads.fa
   ```
-    3.Circular RNA predicting
+   3.Circular RNA predicting
       Final this step, you will get the circular RNA information saved in a file name circ. 
       
   ```bash
