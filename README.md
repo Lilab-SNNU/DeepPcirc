@@ -49,6 +49,7 @@ Predict Plant Circular RNA Based on Deep Learning
   ```bash
    python DeepPcirc_predict.py -infile pre_coding  -modelfile checkpointNCP_ANF.pt -outfile pre_result
   ```
+---
 ## Contact us
 
 If you encounter any problems while using Pcirc, please send an email (glli@snnu.edu.cn) or submit the issues on GitHub (https://github.com/Lilab-SNNU/DeepPcirc/issues) and we will resolve it as soon as possible.
