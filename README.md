@@ -39,7 +39,7 @@ Predict Plant Circular RNA Based on Deep Learning
     1.
     
     2.Reads coding
-      You got ***upreads.fa*** and ***downreads.fa*** from the previous step.In order to make predictions, you need to code them.In this step, you enter the two files obtained in the previous step,then you can get a file named ***pre_coding***.
+      You got ***upreads.fa*** and **unmapped.fasta** from the previous step.In order to make predictions, you need to code them.In this step, you enter the two files obtained in the previous step,then you can get a file named ***pre_coding***.
   ```bash
    python DeepPcirc_seqprocess.py -up upreads.fa -down downreads.fa
   ```
