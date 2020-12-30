@@ -29,7 +29,7 @@ Predict Plant Circular RNA Based on Deep Learning
 ## Download
   Open the terminal and input:
   ```bash
-  git clone https://github.com/Lilab-SNNU/Pcirc.git
+  git clone https://github.com/Lilab-SNNU/DeepPcirc.git
   ```
 ---
 ## Usage
