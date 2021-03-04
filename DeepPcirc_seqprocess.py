@@ -80,18 +80,18 @@ if __name__ == '__main__':
 
 
     alignment_res = '/'.join(info_file.split('/')[:-1]) + '/alignment_res'
-    df_alis = Pcirc_deal_blast_result.exactReads(info_file)
-    df_list = Pcirc_deal_blast_result.cutDatafram(df_alis)
+    df_alis = DeepPcirc_deal_blast_result.exactReads(info_file)
+    df_list = DeepPcirc_deal_blast_result.cutDatafram(df_alis)
     pool = multiprocessing.Pool(len(df_list))
     print('Alignment reads begining')
 
     for dataframe in df_list:
-        pool.apply_async(Pcirc_deal_blast_result.getCircInformation,
+        pool.apply_async(DeepPcirc_deal_blast_result.getCircInformation,
                          (dataframe, alignment_res, ))
     pool.close()
     pool.join()
     print('Alignment reads ending')
 
-    up_filename, down_filename = Pcirc_circ_seq_extract.get_seq(alignment_res, genome_file)
+    up_filename, down_filename = DeepPcirc_circ_seq_extract.get_seq(alignment_res, genome_file)
     codingadd(up_filename, down_filename)
 
