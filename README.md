@@ -56,7 +56,7 @@ Predict Plant Circular RNA Based on Deep Learning
 
      Then, you will get a file named unmapped.blast in the dir which unmapped.fasta in, it content the blast information and will be used to the ***step Reads coding***
   ```bash
-   python DeepPcirc_Blast.py  -g genome.fa -q unmapped.fasta -o output_dir
+   python DeepPcirc_unmapped_reads_blast.py  -g genome.fa -q unmapped.fasta -o output_dir
   ```
    3.Reads coding
       Encode the sequence,in this step need given file:
