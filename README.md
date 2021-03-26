@@ -73,6 +73,12 @@ Predict Plant Circular RNA Based on Deep Learning
   ```bash
    python DeepPcirc_predict.py -infile pre_coding  -modelfile checkpointNCP_ANF.pt -outfile pre_result
   ```
+   4.train new model
+      If you have new species data, you can train new models yourself. 
+      
+  ```bash
+   python DeepPcirc_train.py -infile train_coding  -o model
+  ```
 ---
 ## Contact us
 
