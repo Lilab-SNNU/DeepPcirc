@@ -63,12 +63,10 @@ def get_seq(info_file, genome_file):
             circ_down_seq = genome_dict[chr_name][0:100]
             circ_seq, circ_up_seq, circ_down_seq = reverse(circ_seq), reverse(circ_up_seq), reverse(circ_down_seq)
 
-
         if len(circ_seq) < 10000:
             file_circ.write('>' + circ_name + '_%s' % chr_name[1:] + '_%s' % strand + '_%s|%s' % (start_site, end_site) + '\n' + circ_seq + '\n')
             file_up.write('>' + circ_name + '_%s' % chr_name[1:] + '_%s' % strand + '_%s|%s' % (start_site, end_site) + '\n' + circ_up_seq + '\n')
             file_down.write('>' + circ_name + '_%s' % chr_name[1:] + '_%s' % strand + '_%s|%s' % (start_site, end_site) + '\n' + circ_down_seq + '\n')
-
 
     print('sequence finding　ending')
 
