@@ -15,7 +15,6 @@ def save_checkpoint(state,is_best,outfile):
     else:
         print("=> Validation Performance did not improve")
 
-
 def ytest_ypred_to_file(y_test, y_pred, out_fn):
     with open(out_fn,'w') as f:
         for i in range(len(y_test)):
@@ -23,7 +22,6 @@ def ytest_ypred_to_file(y_test, y_pred, out_fn):
 def trainmodel(infile,outfile)
     data = pd.read_csv(infile, sep='\s+', header=None)
     print(data.shape, type(data))
-
     data_train = data.values.tolist()
     model_path = '.'
 
@@ -39,7 +37,6 @@ def trainmodel(infile,outfile)
     vec_len = 8
 
     best_acc_list = []
-
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1.0 / 8, random_state=42)
     X_train = X_train.reshape(X_train.shape[0], int(X_train.shape[1] / vec_len), vec_len)
     X_test = X_test.reshape(X_test.shape[0], int(X_test.shape[1] / vec_len), vec_len)
@@ -72,53 +69,39 @@ def trainmodel(infile,outfile)
         y_pred_prob_train = []
         y_batch_train = []
         y_batch_pred_train = []
-
         num_batches = n_examples // BATCH_SIZE
         for k in range(num_batches):
             start, end = k * BATCH_SIZE, (k + 1) * BATCH_SIZE
             output_train, y_pred_prob, y_batch, y_pred_train = train(net, loss, optimizer, X_train[start:end],
                                                                      y_train[start:end])
-
             cost += output_train
-
             prob_data = y_pred_prob.data.numpy()
-
             for m in range(len(prob_data)):
                 y_pred_prob_train.append(np.exp(prob_data)[m][1])
             y_batch_train += y_batch
             y_batch_pred_train += y_pred_train
-
         scheduler.step()
-
         start, end = num_batches * BATCH_SIZE, n_examples
         output_train, y_pred_prob, y_batch, y_pred_train = train(net, loss, optimizer, X_train[start:end],
                                                                  y_train[start:end])
-
         cost += output_train
-
         prob_data = y_pred_prob.data.numpy()
-
         for m in range(len(prob_data)):
             y_pred_prob_train.append(np.exp(prob_data)[m][1])
-
         y_batch_train += y_batch
         y_batch_pred_train += y_pred_train
         fpr_train, tpr_train, thresholds_train = roc_curve(y_batch_train, y_pred_prob_train)
-
         output_test = predict(net, X_test)
         y_pred_prob_test = []
         y_pred_test = output_test.data.numpy().argmax(axis=1)
-
         prob_data = F.log_softmax(output_test, dim=1).data.numpy()
         for m in range(len(prob_data)):
             y_pred_prob_test.append(np.exp(prob_data)[m][1])
-
         fpr_test, tpr_test, thresholds_test = roc_curve(y_test, y_pred_prob_test)
         precision_test, recall_test, _ = precision_recall_curve(y_test, y_pred_prob_test)
         end_time = time.time()
         hours, rem = divmod(end_time - start_time, 3600)
         minutes, seconds = divmod(rem, 60)
-
         print(
             "Epoch %d, cost = %f, AUROC_train = %0.4f, train_acc = %.4f, train_recall= %.4f,train_precision = %.4f, train_f1score = %.4f,train_mcc= %.4f, test_acc = %.4f, test_recall= %.4f,test_precision = %.4f, test_f1score = %.4f,test_mcc= %.4f,AUROC_test = %0.4f"
             % (i + 1, cost / num_batches, auc(fpr_train, tpr_train), accuracy_score(y_batch_train, y_batch_pred_train),
@@ -130,11 +113,9 @@ def trainmodel(infile,outfile)
                auc(fpr_test, tpr_test)))
 
         print("time cost: {:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds))
-
         cur_acc = accuracy_score(y_batch_train, y_batch_pred_train)
         is_best = bool(cur_acc >= best_acc)
         best_acc = max(cur_acc, best_acc)
-
         save_checkpoint({
             'epoch': i + 1,
             'state_dict': net.state_dict(),
@@ -146,7 +127,6 @@ def trainmodel(infile,outfile)
             patience += 1
             if patience >= 10:
                 break
-
         else:
             patience = 0
 
@@ -157,13 +137,10 @@ def trainmodel(infile,outfile)
             ytest_ypred_to_file(y_test, y_pred_prob_test,
                                 outfile)
 
-
     best_acc_list.append(best_acc)
     print('> best acc:', best_acc)
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser()
-
     parser.add_argument("-in", "--infile", action="store", dest='upfile', required=True,
                         help="coding file")
     parser.add_argument("-o", "--outfile", action="store", dest='outfile', required=True,
