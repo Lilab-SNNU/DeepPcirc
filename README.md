@@ -54,11 +54,20 @@ Predict Plant Circular RNA Based on Deep Learning
      - Genome sequence (fasta format)
      - Unmapped reads from ***step Alignment*** (fasta format)
 
-     Then, you will get a file named unmapped.blast in the dir which unmapped.fasta in, it content the blast information and will be used to the ***step Reads coding***
+     Then, you will get a file named unmapped.blast in the dir which unmapped.fasta in, it content the blast information and will be used to the ***step Sequence extraction***
   ```bash
    python DeepPcirc_unmapped_reads_blast.py  -g genome.fa -q unmapped.fasta -o output_dir
   ```
-   3.Reads coding
+   3.Sequence extraction
+      Extracting feature sequences,in this step need given file:
+      - blast information file from ***step Blast***
+      - Genome sequence (fasta format) 
+      Then you can get ***upfile*** and **downfile***and will be used to the ***step Reads coding***
+
+  ```bash
+   python DeepPcirc_getseq.py -i unmapped.blast -g genome.fa
+  ```
+   4.Reads coding
       Encode the sequence,in this step need given file:
       - up reads file
       - down reads file 
@@ -67,13 +76,13 @@ Predict Plant Circular RNA Based on Deep Learning
   ```bash
    python DeepPcirc_seqprocess.py -up upfile -down downfile -out out
   ```
-   4.Circular RNA predicting
+   5.Circular RNA predicting
       Final this step, you will get the circular RNA information saved in a file name ***pre_result***. 
       
   ```bash
    python DeepPcirc_predict.py -infile pre_coding  -modelfile osamodel.pt -outfile pre_result
   ```
-   5.train new model
+   6.train new model
       If you have new species data, you can train new models yourself. 
       
   ```bash
