@@ -1,7 +1,6 @@
 from DeepPcirc_model import *
 import argparse
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser()
 
     parser.add_argument("-infile", "--infile", action="store", dest='infile', required=True,
@@ -39,9 +38,7 @@ if __name__ == '__main__':
     with open(args.outfile,'w') as fw:
         while i +  BATCH_SIZE < N:
             x_batch = X[i:i+BATCH_SIZE]
-        
             output_test = predict(model,x_batch)
-
             prob_data = F.log_softmax(output_test, dim=1).data.numpy()
             for m in range(len(prob_data)):
                 fw.write(str(np.exp(prob_data)[m][1])+'\n')
