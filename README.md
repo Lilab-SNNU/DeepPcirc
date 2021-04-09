@@ -73,7 +73,7 @@ Predict Plant Circular RNA Based on Deep Learning
   ```bash
    python DeepPcirc_predict.py -infile pre_coding  -modelfile osamodel.pt -outfile pre_result
   ```
-   4.train new model
+   5.train new model
       If you have new species data, you can train new models yourself. 
       
   ```bash
