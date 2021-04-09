@@ -22,7 +22,6 @@ def coding(upfile, downfile):
 
     return upNCP, upANF, downNCP, downANF
 
-
 def codingadd(upfile, downfile): 
     upNCP, upANF, downNCP, downANF = coding(upfile, downfile)
     upNCP_pd = pd.read_csv(upNCP, sep='\s+', header=None)
@@ -62,7 +61,6 @@ def codingadd(upfile, downfile):
     os.system("paste %s %s > %s" %(up_path,down_NCP_ANF_out_nolabel,pre_NCP_ANF))
 if __name__ == '__main__':
 
-
     path = os.path.realpath(__file__)  
     abs_dir = path[:path.rfind('/')]
     parser = argparse.ArgumentParser()
@@ -73,12 +71,9 @@ if __name__ == '__main__':
     parser.add_argument("-g",
                         help='path to genome, and the file format is fasta')
 
-
     args = parser.parse_args() 
     info_file = args.i  
     genome_file = args.g  
-
-
     alignment_res = '/'.join(info_file.split('/')[:-1]) + '/alignment_res'
     df_alis = DeepPcirc_deal_blast_result.exactReads(info_file)
     df_list = DeepPcirc_deal_blast_result.cutDatafram(df_alis)
