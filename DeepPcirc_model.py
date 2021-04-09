@@ -6,7 +6,6 @@ import torch.optim as optim
 import numpy as np
 import time
 
-
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 class NetCNN(nn.Module):
@@ -15,7 +14,6 @@ class NetCNN(nn.Module):
         self.conv1 = nn.Conv1d(8, 128, 12)
         self.conv1.add_module("batchnorm",nn.BatchNorm1d(128))
         self.conv1.add_module("relu", nn.ReLU())
-
         self.conv2 = nn.Conv1d(128,128,8)
         self.conv2.add_module("batchnorm2", nn.BatchNorm1d(128))
         self.conv2.add_module("relu2", nn.ReLU())
@@ -24,7 +22,6 @@ class NetCNN(nn.Module):
         self.conv3.add_module("relu3", nn.ReLU())
         self.pool = nn.MaxPool1d(6,6)
         self.dp = nn.Dropout(0.3)
-
     def forward(self, x):
         x = self.conv3(self.conv2(self.conv1(x)))
         x = self.pool(x)
@@ -35,7 +32,6 @@ class NetRNN(nn.Module):
     def __init__(self, wordvec_len ,HIDDEN_NUM, LAYER_NUM, DROPOUT, cell):
         super(NetRNN,self).__init__()
         self.rnn = torch.nn.Sequential()
-
         if cell == 'LSTM':
             self.rnn.add_module("lstm", nn.LSTM(input_size=wordvec_len, hidden_size=HIDDEN_NUM, num_layers=LAYER_NUM,
                                bidirectional=True, dropout=DROPOUT))
@@ -43,9 +39,7 @@ class NetRNN(nn.Module):
             self.rnn.add_module("gru", nn.GRU(input_size=wordvec_len, hidden_size=HIDDEN_NUM, num_layers=LAYER_NUM,
                                                     bidirectional=True, dropout=DROPOUT))
 
-
     def forward(self, x):
-
         x = x.permute(2,0,1)
         out, _ = self.rnn(x) 
         out = torch.mean(out, 0)
@@ -65,9 +59,7 @@ class ronghe_model(nn.Module):
         self.fc2 = nn.Linear(10, 2)
         self.dp = nn.Dropout(0.5)
 
-
     def forward(self, x):
-
         x = self.cnn(x)
         x = self.rnn(x)
         x = self.dp(x)
@@ -77,7 +69,6 @@ class ronghe_model(nn.Module):
         return x
 
 def train(model, loss, optimizer, x_val, y_val):
-
     x = x_val.to(device)
     y = y_val.to(device)
     model.train()
@@ -87,12 +78,10 @@ def train(model, loss, optimizer, x_val, y_val):
     pred_prob = F.log_softmax(fx, dim=1)
     output.backward()
     optimizer.step()
-
     return output.item(), pred_prob, list(np.array(y_val)), list(fx.data.cpu().detach().numpy().argmax(axis=1))
 
 def predict(model, x_val):
     model.eval()
-
     output = model.forward(x_val)
     return output
 
