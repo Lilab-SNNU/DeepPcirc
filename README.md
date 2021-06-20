@@ -99,4 +99,4 @@ Predict Plant Circular RNA Based on Deep Learning
 ---
 ## Contact us
 
-If you encounter any problems while using Pcirc, please send an email (glli@snnu.edu.cn) or submit the issues on GitHub (https://github.com/Lilab-SNNU/DeepPcirc/issues) and we will resolve it as soon as possible.
+If you encounter any problems while using DeepPcirc, please send an email (glli@snnu.edu.cn) or submit the issues on GitHub (https://github.com/Lilab-SNNU/DeepPcirc/issues) and we will resolve it as soon as possible.
